@@ -1,5 +1,6 @@
 node_modules/
 .expo/
+__pycache__/
 dist/
 *.jks
 *.p8
@@ -9,3 +10,6 @@ dist/
 *.orig.*
 web-build/
 .env
+*.db
+backend/uploads/*
+!backend/uploads/.gitkeep
