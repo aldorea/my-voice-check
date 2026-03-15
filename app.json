@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Mi Estado de Ánimo",
+    "slug": "my-voice-check",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#6C63FF"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Necesitamos acceso al micrófono para grabar notas de voz sobre tu estado de ánimo."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#6C63FF"
+      },
+      "permissions": ["RECORD_AUDIO"]
+    },
+    "plugins": [
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Permitir acceso al micrófono para grabar notas de voz."
+        }
+      ]
+    ]
+  }
+}
