@@ -1,0 +1,35 @@
+# Test: Eliminar un registro del historial
+# Crea un registro, va al historial y lo elimina
+
+appId: host.exp.exponent
+tags:
+  - history
+  - delete
+---
+# Crear un registro
+- assertVisible: "¿Cómo te sientes ahora?"
+- tapOn:
+    id: "mood-4"
+- tapOn:
+    id: "mood-text-input"
+- inputText: "Registro que será eliminado"
+- hideKeyboard
+- tapOn:
+    id: "save-entry-btn"
+- assertVisible: "Guardado ✓"
+- tapOn: "OK"
+
+# Ir al historial
+- tapOn: "Historial"
+- assertVisible: "Registro que será eliminado"
+
+# Eliminar el registro
+- tapOn:
+    id: "delete-entry-btn"
+
+# Confirmar eliminación en el alert
+- assertVisible: "Eliminar registro"
+- tapOn: "Eliminar"
+
+# Verificar que el registro fue eliminado
+- assertNotVisible: "Registro que será eliminado"

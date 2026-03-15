@@ -6,7 +6,13 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test:e2e": "maestro test .maestro/",
+    "test:e2e:text": "maestro test .maestro/01_record_mood_text.yaml",
+    "test:e2e:voice": "maestro test .maestro/02_record_mood_voice.yaml",
+    "test:e2e:history": "maestro test .maestro/03_view_history.yaml",
+    "test:e2e:delete": "maestro test .maestro/04_delete_entry.yaml",
+    "test:e2e:validation": "maestro test .maestro/05_validation_errors.yaml"
   },
   "dependencies": {
     "expo": "~52.0.0",

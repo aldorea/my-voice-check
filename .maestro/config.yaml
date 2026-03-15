@@ -1,0 +1,12 @@
+# Maestro E2E Test Configuration
+# For Expo Go, use the Expo Go app ID
+# For standalone builds, replace with your app's bundle ID
+
+appId: host.exp.exponent
+
+# Default settings
+tags:
+  - all
+
+onFlowStart:
+  - clearState

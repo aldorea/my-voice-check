@@ -1,0 +1,21 @@
+# Test: Validaciones del formulario
+# Verifica que se muestren errores cuando faltan campos
+
+appId: host.exp.exponent
+tags:
+  - validation
+---
+# Intentar guardar sin seleccionar mood
+- assertVisible: "¿Cómo te sientes ahora?"
+- tapOn:
+    id: "save-entry-btn"
+- assertVisible: "Selecciona tu estado de ánimo"
+- tapOn: "OK"
+
+# Seleccionar mood pero sin texto ni voz
+- tapOn:
+    id: "mood-1"
+- tapOn:
+    id: "save-entry-btn"
+- assertVisible: "Agrega una nota"
+- tapOn: "OK"

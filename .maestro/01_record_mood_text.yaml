@@ -1,0 +1,35 @@
+# Test: Registrar un estado de ánimo con texto
+# Verifica que el usuario puede seleccionar un mood, escribir texto y guardar
+
+appId: host.exp.exponent
+tags:
+  - mood
+  - text
+---
+# Esperar a que la app cargue
+- assertVisible: "¿Cómo te sientes ahora?"
+
+# Seleccionar mood "Muy bien"
+- tapOn:
+    id: "mood-5"
+
+# Escribir una nota de texto
+- tapOn:
+    id: "mood-text-input"
+- inputText: "Hoy fue un excelente día, me siento con mucha energía"
+
+# Ocultar teclado
+- hideKeyboard
+
+# Guardar el registro
+- tapOn:
+    id: "save-entry-btn"
+
+# Verificar que se guardó correctamente
+- assertVisible: "Guardado ✓"
+
+# Confirmar el alert
+- tapOn: "OK"
+
+# Verificar que el formulario se limpió
+- assertVisible: "¿Cómo te sientes ahora?"

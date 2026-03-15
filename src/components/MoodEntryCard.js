@@ -26,14 +26,14 @@ export default function MoodEntryCard({ entry, onDeleted }) {
   };
 
   return (
-    <View style={[styles.card, { borderLeftColor: mood.color }]}>
+    <View testID={`entry-card-${entry.id}`} style={[styles.card, { borderLeftColor: mood.color }]}>
       <View style={styles.header}>
         <Text style={styles.emoji}>{mood.emoji}</Text>
         <View style={styles.headerText}>
           <Text style={styles.moodLabel}>{mood.label}</Text>
           <Text style={styles.time}>{time}</Text>
         </View>
-        <TouchableOpacity onPress={handleDelete} style={styles.deleteBtn}>
+        <TouchableOpacity testID="delete-entry-btn" onPress={handleDelete} style={styles.deleteBtn}>
           <Text style={styles.deleteText}>✕</Text>
         </TouchableOpacity>
       </View>

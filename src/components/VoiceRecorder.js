@@ -51,11 +51,11 @@ export default function VoiceRecorder({ audioUri, onRecorded, onClear }) {
 
       {audioUri ? (
         <View style={styles.recorded}>
-          <TouchableOpacity style={styles.playBtn} onPress={() => playAudio(audioUri)}>
+          <TouchableOpacity testID="play-audio-btn" style={styles.playBtn} onPress={() => playAudio(audioUri)}>
             <Text style={styles.playIcon}>▶️</Text>
             <Text style={styles.playText}>Reproducir</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={onClear}>
+          <TouchableOpacity testID="clear-audio-btn" onPress={onClear}>
             <Text style={styles.clearText}>Eliminar</Text>
           </TouchableOpacity>
         </View>
@@ -63,6 +63,8 @@ export default function VoiceRecorder({ audioUri, onRecorded, onClear }) {
         <View style={styles.recordArea}>
           <Animated.View style={{ transform: [{ scale: pulseAnim }] }}>
             <TouchableOpacity
+              testID="record-btn"
+              accessibilityLabel={isRecording ? 'Detener grabación' : 'Grabar nota de voz'}
               style={[styles.recordBtn, isRecording && styles.recordingBtn]}
               onPress={handleRecord}
             >

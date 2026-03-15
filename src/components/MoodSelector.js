@@ -10,6 +10,8 @@ export default function MoodSelector({ selected, onSelect }) {
         {MOODS.map((mood) => (
           <TouchableOpacity
             key={mood.value}
+            testID={`mood-${mood.value}`}
+            accessibilityLabel={mood.label}
             style={[
               styles.moodBtn,
               selected === mood.value && {

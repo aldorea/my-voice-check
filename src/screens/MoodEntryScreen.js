@@ -73,6 +73,7 @@ export default function MoodEntryScreen({ navigation }) {
 
         <Text style={styles.sectionTitle}>Escribe cómo te sientes</Text>
         <TextInput
+          testID="mood-text-input"
           style={styles.textInput}
           placeholder="Hoy me siento así porque..."
           placeholderTextColor="#aaa"
@@ -90,6 +91,7 @@ export default function MoodEntryScreen({ navigation }) {
         />
 
         <TouchableOpacity
+          testID="save-entry-btn"
           style={[styles.saveBtn, saving && styles.savingBtn]}
           onPress={handleSave}
           disabled={saving}

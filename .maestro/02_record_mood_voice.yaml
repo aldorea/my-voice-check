@@ -1,0 +1,47 @@
+# Test: Registrar un estado de ánimo con nota de voz
+# Verifica que el usuario puede grabar una nota de voz y guardar
+
+appId: host.exp.exponent
+tags:
+  - mood
+  - voice
+---
+# Esperar a que la app cargue
+- assertVisible: "¿Cómo te sientes ahora?"
+
+# Seleccionar mood "Mal"
+- tapOn:
+    id: "mood-2"
+
+# Iniciar grabación de voz
+- tapOn:
+    id: "record-btn"
+
+# Permitir permisos de micrófono si aparecen
+- runFlow:
+    when:
+      visible: "Allow"
+    commands:
+      - tapOn: "Allow"
+
+# Esperar 3 segundos de grabación
+- swipe:
+    direction: UP
+    duration: 3000
+  # Usamos swipe como "wait" ya que Maestro no tiene wait nativo
+  # Alternativa: el usuario puede agregar un wait con extendedWaitUntil
+
+# Detener grabación
+- tapOn:
+    id: "record-btn"
+
+# Verificar que se muestra el reproductor
+- assertVisible: "Reproducir"
+
+# Guardar el registro
+- tapOn:
+    id: "save-entry-btn"
+
+# Verificar que se guardó
+- assertVisible: "Guardado ✓"
+- tapOn: "OK"

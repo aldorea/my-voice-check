@@ -1,0 +1,29 @@
+# Test: Ver historial de registros
+# Primero crea un registro y luego verifica que aparece en el historial
+
+appId: host.exp.exponent
+tags:
+  - history
+---
+# Esperar a que la app cargue
+- assertVisible: "¿Cómo te sientes ahora?"
+
+# Crear un registro primero
+- tapOn:
+    id: "mood-3"
+- tapOn:
+    id: "mood-text-input"
+- inputText: "Registro de prueba para historial"
+- hideKeyboard
+- tapOn:
+    id: "save-entry-btn"
+- assertVisible: "Guardado ✓"
+- tapOn: "OK"
+
+# Navegar al historial
+- tapOn: "Historial"
+
+# Verificar que el historial muestra el registro
+- assertVisible: "Tu historial"
+- assertVisible: "Normal"
+- assertVisible: "Registro de prueba para historial"
