@@ -14,6 +14,12 @@ class Settings(BaseSettings):
 
     UPLOAD_DIR: Path = Path(__file__).resolve().parent.parent.parent / "uploads"
 
+    ANTHROPIC_API_KEY: str = ""
+    ANTHROPIC_MODEL: str = "claude-sonnet-4-20250514"
+
+    OPENAI_API_KEY: str = ""
+    WHISPER_MODEL: str = "whisper-1"
+
     class Config:
         env_file = ".env"
 

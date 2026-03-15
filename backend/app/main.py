@@ -7,6 +7,7 @@ from app.core.config import settings
 from app.core.database import init_db
 from app.api.auth import router as auth_router
 from app.api.moods import router as moods_router
+from app.api.analysis import router as analysis_router
 
 
 @asynccontextmanager
@@ -30,6 +31,7 @@ app.add_middleware(
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(moods_router, prefix="/api")
+app.include_router(analysis_router, prefix="/api")
 
 
 @app.get("/api/health")

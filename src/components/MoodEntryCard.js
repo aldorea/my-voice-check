@@ -1,10 +1,12 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { getMoodByValue } from '../constants/moods';
 import { playAudio } from '../services/audio';
 import { deleteEntry } from '../services/storage';
+import { analyzeEntry } from '../services/api';
 
-export default function MoodEntryCard({ entry, onDeleted }) {
+export default function MoodEntryCard({ entry, onDeleted, onAnalyzed }) {
+  const [analyzing, setAnalyzing] = useState(false);
   const mood = getMoodByValue(entry.moodValue);
   const time = new Date(entry.timestamp).toLocaleTimeString('es', {
     hour: '2-digit',
@@ -23,6 +25,22 @@ export default function MoodEntryCard({ entry, onDeleted }) {
         },
       },
     ]);
+  };
+
+  const handleAnalyze = async () => {
+    setAnalyzing(true);
+    try {
+      const result = await analyzeEntry(entry.id);
+      if (onAnalyzed) onAnalyzed(result);
+      Alert.alert(
+        '🧠 Análisis listo',
+        `${result.emotional_state}\n\nVe a la pestaña "Análisis" para ver el detalle completo.`
+      );
+    } catch (err) {
+      Alert.alert('Error', err.message || 'No se pudo analizar. Verifica tu conexión al servidor.');
+    } finally {
+      setAnalyzing(false);
+    }
   };
 
   return (
@@ -49,6 +67,21 @@ export default function MoodEntryCard({ entry, onDeleted }) {
           <Text style={styles.audioText}>Reproducir nota de voz</Text>
         </TouchableOpacity>
       ) : null}
+
+      <TouchableOpacity
+        style={[styles.analyzeBtn, analyzing && styles.analyzingBtn]}
+        onPress={handleAnalyze}
+        disabled={analyzing}
+      >
+        {analyzing ? (
+          <ActivityIndicator color="#6C63FF" size="small" />
+        ) : (
+          <>
+            <Text style={styles.analyzeIcon}>🧠</Text>
+            <Text style={styles.analyzeText}>Analizar con IA</Text>
+          </>
+        )}
+      </TouchableOpacity>
     </View>
   );
 }
@@ -84,4 +117,19 @@ const styles = StyleSheet.create({
   },
   audioIcon: { fontSize: 18, marginRight: 8 },
   audioText: { color: '#6C63FF', fontWeight: '600', fontSize: 13 },
+  analyzeBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F8F7FF',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: '#E0DEFF',
+    gap: 6,
+  },
+  analyzingBtn: { opacity: 0.7 },
+  analyzeIcon: { fontSize: 16 },
+  analyzeText: { color: '#6C63FF', fontWeight: '600', fontSize: 13 },
 });

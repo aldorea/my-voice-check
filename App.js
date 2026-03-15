@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text } from 'react-native';
 import MoodEntryScreen from './src/screens/MoodEntryScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
+import AnalysisScreen from './src/screens/AnalysisScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -51,6 +52,16 @@ export default function App() {
             tabBarLabel: 'Historial',
             tabBarIcon: ({ color }) => (
               <Text style={{ fontSize: 22 }}>📋</Text>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Analysis"
+          component={AnalysisScreen}
+          options={{
+            tabBarLabel: 'Análisis',
+            tabBarIcon: ({ color }) => (
+              <Text style={{ fontSize: 22 }}>🧠</Text>
             ),
           }}
         />

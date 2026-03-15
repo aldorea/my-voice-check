@@ -101,3 +101,26 @@ export async function deleteMoodEntry(entryId) {
 export function getAudioUrl(entryId) {
   return `${BASE_URL}/moods/${entryId}/audio`;
 }
+
+// ==================== ANALYSIS ====================
+
+export async function analyzeEntry(entryId) {
+  return request(`/analysis/entry/${entryId}`, { method: 'POST' });
+}
+
+export async function analyzeDailyMood(date = null) {
+  const query = date ? `?date=${date}` : '';
+  return request(`/analysis/daily${query}`, { method: 'POST' });
+}
+
+export async function analyzeWeeklyMood() {
+  return request('/analysis/weekly', { method: 'POST' });
+}
+
+export async function getAnalyses(skip = 0, limit = 20) {
+  return request(`/analysis/?skip=${skip}&limit=${limit}`);
+}
+
+export async function getAnalysis(analysisId) {
+  return request(`/analysis/${analysisId}`);
+}
